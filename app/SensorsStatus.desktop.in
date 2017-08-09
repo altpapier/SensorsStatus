@@ -1,8 +1,10 @@
 [Desktop Entry]
 Name=SensorsStatus
-Exec=qmlscene $@ SensorsStatus.qml
-Icon=SensorsStatus.png
+Exec=@EXEC@
+Icon=@ICON@
 Terminal=false
 Type=Application
 X-Ubuntu-Touch=true
+
+
 

@@ -1,0 +1,8 @@
+{
+  "dir": "../../click_build/build_sensorstatus",
+  "sdk": "ubuntu-sdk-15.04",
+  "arch": "all",
+  "template": "pure-qml-cmake",
+  "chroot": "true",
+  "ssh" : "bq.fritz.box"
+}

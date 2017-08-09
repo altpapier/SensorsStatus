@@ -12,9 +12,8 @@ MainView {
     objectName: "mainView"
 
     // Note! applicationName needs to match the "name" field of the click manifest
-    applicationName: "me.yohanboniface.sensorsstatus"
+    applicationName: "sensorsstatus.chris"
     automaticOrientation: true
-    useDeprecatedToolbar: false
 
     width: units.gu(100)
     height: units.gu(75)

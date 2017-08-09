@@ -1,0 +1,17 @@
+{
+    "name": "@APP_ID@",
+    "description": "Listen to your device sensors",
+    "architecture": "@CLICK_ARCH@",
+    "title": "@APP_NAME@",
+    "hooks": {
+        "sensorsstatus": {
+            "apparmor": "SensorsStatus.apparmor",
+            "desktop":  "SensorsStatus.desktop"
+        }
+    },
+    "version": "0.0.6",
+    "maintainer": "chris <altpapier@gmx.net>",
+    "framework" : "ubuntu-sdk-15.04.5"
+}
+
+
