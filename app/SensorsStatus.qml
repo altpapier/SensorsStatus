@@ -1,5 +1,5 @@
 import QtQuick 2.2
-import Ubuntu.Components 1.1
+import Ubuntu.Components 1.3
 import QtPositioning 5.2
 import QtSensors 5.2
 
