@@ -7,7 +7,7 @@ file(GLOB QML_JS_FILES *.qml *.js)
 add_custom_target(sensorsstatus_QMlFiles ALL SOURCES ${QML_JS_FILES})
 
 # Substitute variables in the desktop file
-configure_file(${DESKTOP_FILE_NAME}.in ${CMAKE_CURRENT_BINARY_DIR}/${DESKTOP_FILE_NAME}.in)
+configure_file(${DESKTOP_FILE_NAME}.in ${CMAKE_CURRENT_BINARY_DIR}/${DESKTOP_FILE_NAME})
 
 install(FILES ${CMAKE_CURRENT_BINARY_DIR}/${DESKTOP_FILE_NAME} DESTINATION ${DESKTOP_DIR})
 install(FILES ${QML_JS_FILES} DESTINATION ${SENSORSSTATUS_DIR})
