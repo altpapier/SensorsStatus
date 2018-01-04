@@ -9,8 +9,8 @@
             "desktop":  "SensorsStatus.desktop"
         }
     },
-    "version": "0.0.6",
-    "maintainer": "chris <altpapier@gmx.net>",
+    "version": "0.0.7",
+    "maintainer": "Chris Clime <chris.clime@gmx.net>",
     "framework" : "ubuntu-sdk-15.04.5"
 }
 

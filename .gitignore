@@ -1,1 +1,8 @@
+CMakeFiles
+CMakeCache.txt
 CMakeLists.txt.user
+install_manifest.txt
+Makefile
+manifest.json
+*.cmake
+*.desktop

@@ -239,7 +239,7 @@ MainView {
                         PositionSource {
                             id: geoposition
                             active: true
-                            updateInterval: 1000
+                            preferredPositioningMethods: PositionSource.SatellitePositioningMethods
                         }
 
                     }

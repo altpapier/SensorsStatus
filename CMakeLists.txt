@@ -40,8 +40,12 @@ set(MAIN_QML          "SensorsStatus.qml")
 set(ICON              "graphics/SensorsStatus.png")
 
 # Set install paths
-set(CMAKE_INSTALL_PREFIX /)
-set(DATA_DIR /)
+if(NOT DEFINED CMAKE_INSTALL_PREFIX)
+  set(CMAKE_INSTALL_PREFIX /)
+endif()
+if(NOT DEFINED DATA_DIR)
+  set(DATA_DIR /)
+endif()
 set(DESKTOP_DIR ${DATA_DIR})
 set(DESKTOP_FILE_NAME "SensorsStatus.desktop")
 
