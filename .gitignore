@@ -4,5 +4,6 @@ CMakeLists.txt.user
 install_manifest.txt
 Makefile
 manifest.json
+/build
 *.cmake
 *.desktop

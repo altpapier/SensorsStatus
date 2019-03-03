@@ -12,7 +12,7 @@ MainView {
     objectName: "mainView"
 
     // Note! applicationName needs to match the "name" field of the click manifest
-    applicationName: "sensorsstatus.chris"
+    applicationName: "sensorsstatus.chrisclime"
     automaticOrientation: true
 
     width: units.gu(100)
@@ -48,6 +48,7 @@ MainView {
                 title: i18n.tr('Accelerometer')
                 page: Page {
                     id: accelerometerPage
+
                     NoData {
                         visible: !accelerometer.connectedToBackend
                     }
