@@ -125,7 +125,7 @@ MainView {
                         }
                         visible: !!compass.connectedToBackend
 
-                        Compass {
+                        Magnetometer {
                             id: compass
                             active: true
                         }
