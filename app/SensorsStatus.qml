@@ -19,22 +19,37 @@ MainView {
     height: units.gu(75)
 
     function printablePositionMethod(method) {
-        var out = "Unknown position method";
-        if (method === PositionSource.SatellitePositioningMethod) out = "Satellite";
-        else if (method === PositionSource.NoPositioningMethod) out = "Not available";
-        else if (method === PositionSource.NonSatellitePositioningMethod) out = "Non-satellite";
-        else if (method === PositionSource.AllPositioningMethods) out = "All/multiple";
+        var out = i18n.tr("Unknown position method");
+        if (method === PositionSource.SatellitePositioningMethod) out = i18n.tr("Satellite");
+        else if (method === PositionSource.NoPositioningMethod) out = i18n.tr("Not available");
+        else if (method === PositionSource.NonSatellitePositioningMethod) out = i18n.tr("Non-satellite");
+        else if (method === PositionSource.AllPositioningMethods) out = i18n.tr("All/Multiple");
         return out;
     }
 
     function printableSourceError(method) {
-        var out = "Unknown source error";
-        if (method === PositionSource.AccessError) out = "Access error";
-        else if (method === PositionSource.ClosedError) out = "Closed error";
-        else if (method === PositionSource.NoError) out = "No error";
-        else if (method === PositionSource.UnknownSourceError) out = "Unidentified source error";
-        else if (method === PositionSource.SocketError) out = "Socket error";
+        var out = i18n.tr("Unknown source error");
+        if (method === PositionSource.AccessError) out = i18n.tr("Access error");
+        else if (method === PositionSource.ClosedError) out = i18n.tr("Closed error");
+        else if (method === PositionSource.NoError) out = i18n.tr("No error");
+        else if (method === PositionSource.UnknownSourceError) out = i18n.tr("Unidentified source error");
+        else if (method === PositionSource.SocketError) out = i18n.tr("Socket error");
         return out;
+    }
+
+    function printableOrientation(orientation) {
+        var out = i18n.tr("Unknown orientation");
+        if (orientation === OrientationReading.TopUp) out = i18n.tr("Top edge is up");
+        else if (orientation === OrientationReading.TopDown) out = i18n.tr("Top edge is down");
+        else if (orientation === OrientationReading.LeftUp) out = i18n.tr("Left edge is up");
+        else if (orientation === OrientationReading.RightUp) out = i18n.tr("Right edge is up");
+        else if (orientation === OrientationReading.FaceUp) out = i18n.tr("Face is up");
+        else if (orientation === OrientationReading.FaceDown) out = i18n.tr("Face is down");
+        return out;
+    }
+
+    function round(number, digits) {
+        return Math.round(number*Math.pow(10, digits))/Math.pow(10, digits);
     }
 
     PageStack {
@@ -58,22 +73,61 @@ MainView {
                             margins: units.gu(2)
                             fill: parent
                         }
-                        visible: !!accelerometer.connectedToBackend
+                        visible: accelerometer.connectedToBackend
                         Accelerometer {
                             id: accelerometer
                             active: true
                         }
                         RowField {
                             title: i18n.tr('x (m/s/s)')
-                            text: accelerometer.reading != null ? accelerometer.reading.x : '-'
+                            text: accelerometer.reading != null ? round(accelerometer.reading.x,1) : '-'
                         }
                         RowField {
                             title: i18n.tr('y (m/s/s)')
-                            text: accelerometer.reading != null ? accelerometer.reading.y : '-'
+                            text: accelerometer.reading != null ? round(accelerometer.reading.y,1) : '-'
                         }
                         RowField {
                             title: i18n.tr('z (m/s/s)')
-                            text: accelerometer.reading != null ? accelerometer.reading.z : '-'
+                            text: accelerometer.reading != null ? round(accelerometer.reading.z,1) : '-'
+                        }
+                    }
+                }
+            }
+
+            Tab {
+                title: i18n.tr('Magnetometer')
+                page: Page {
+                    id: magnetometerPage
+
+                    NoData {
+                        visible: !magnetometer.connectedToBackend
+                    }
+                    Column {
+                        spacing: units.gu(1)
+                        anchors {
+                            margins: units.gu(2)
+                            fill: parent
+                        }
+                        visible: magnetometer.connectedToBackend
+                        Accelerometer {
+                            id: magnetometer
+                            active: true
+                        }
+                        RowField {
+                            title: i18n.tr('x')
+                            text: magnetometer.reading != null ? round(magnetometer.reading.x,1) : '-'
+                        }
+                        RowField {
+                            title: i18n.tr('y')
+                            text: magnetometer.reading != null ? round(magnetometer.reading.y,1) : '-'
+                        }
+                        RowField {
+                            title: i18n.tr('z')
+                            text: magnetometer.reading != null ? round(magnetometer.reading.z,1) : '-'
+                        }
+                        RowField {
+                            title: i18n.tr('Calibration level')
+                            text: magnetometer.reading != null && magnetometer.reading.calibrationLevel != null ? magnetometer.reading.calibrationLevel : '—'
                         }
                     }
                 }
@@ -94,7 +148,7 @@ MainView {
                             margins: units.gu(2)
                             fill: parent
                         }
-                        visible: !!altimeter.connectedToBackend
+                        visible: altimeter.connectedToBackend
 
                         Altimeter {
                             id: altimeter
@@ -123,7 +177,7 @@ MainView {
                             margins: units.gu(2)
                             fill: parent
                         }
-                        visible: !!compass.connectedToBackend
+                        visible: compass.connectedToBackend
 
                         Compass {
                             id: compass
@@ -134,7 +188,7 @@ MainView {
                             text: compass.reading != null ? compass.reading.azimuth : '—'
                         }
                         RowField {
-                            title: i18n.tr('calibration level')
+                            title: i18n.tr('Calibration level')
                             text: compass.reading != null ? compass.reading.calibrationLevel : '—'
                         }
                     }
@@ -260,7 +314,7 @@ MainView {
                             margins: units.gu(2)
                             fill: parent
                         }
-                        visible: !!gyroscope.connectedToBackend
+                        visible: gyroscope.connectedToBackend
                         Gyroscope {
                             id: gyroscope
                             active: true
@@ -294,7 +348,7 @@ MainView {
                             margins: units.gu(2)
                             fill: parent
                         }
-                        visible: !!pressure.connectedToBackend
+                        visible: pressure.connectedToBackend
                         PressureSensor {
                             id: pressure
                             active: true
@@ -302,6 +356,165 @@ MainView {
                         RowField {
                             title: i18n.tr('pressure (Pa)')
                             text: pressure.reading != null ? pressure.reading.pressure : '-'
+                        }
+                    }
+                }
+            }
+            Tab {
+                title: i18n.tr('Rotation')
+                page: Page {
+                    id: rotationPage
+                    NoData {
+                        visible: !rotation.connectedToBackend
+                    }
+                    Column {
+                        spacing: units.gu(1)
+                        anchors {
+                            margins: units.gu(2)
+                            fill: parent
+                        }
+                        visible: rotation.connectedToBackend
+                        RotationSensor {
+                            id: rotation
+                            active: true
+                        }
+                        RowField {
+                            title: i18n.tr('x [°]')
+                            text: rotation.reading != null ? round(rotation.reading.x, 1) : '-'
+                        }
+                        RowField {
+                            title: i18n.tr('y [°]')
+                            text: rotation.reading != null ? round(rotation.reading.y, 1) : '-'
+                        }
+                        RowField {
+                            title: i18n.tr('z [°]')
+                            visible: rotation.hasZ
+                            text: rotation.reading != null ? round(rotation.reading.z, 1) : '-'
+                        }
+                    }
+                }
+            }
+            Tab {
+                title: i18n.tr('Orientation')
+                page: Page {
+                    id: orientationPage
+                    NoData {
+                        visible: !orientation.connectedToBackend
+                    }
+                    Column {
+                        spacing: units.gu(1)
+                        anchors {
+                            margins: units.gu(2)
+                            fill: parent
+                        }
+                        visible: orientation.connectedToBackend
+                        OrientationSensor {
+                            id: orientation
+                            active: true
+                        }
+                        RowField {
+                            title: i18n.tr('Orientation')
+                            text: orientation.reading != null ? printableOrientation(orientation.reading.orientation) : '-'
+                        }
+                    }
+                }
+            }
+            Tab {
+                title: i18n.tr('Ambient Light')
+                page: Page {
+                    id: ambientLightPage
+                    NoData {
+                        visible: !ambientLight.connectedToBackend
+                    }
+                    Column {
+                        spacing: units.gu(1)
+                        anchors {
+                            margins: units.gu(2)
+                            fill: parent
+                        }
+                        visible: ambientLight.connectedToBackend
+                        AmbientLightSensor {
+                            id: ambientLight
+                            active: true
+                        }
+                        RowField {
+                            title: i18n.tr('Ambient Light')
+                            text: ambientLight.reading != null ? ambientLight.reading.lightLevel : '-'
+                        }
+                    }
+                }
+            }
+            Tab {
+                title: i18n.tr('Light')
+                page: Page {
+                    id: lightPage
+                    NoData {
+                        visible: !light.connectedToBackend
+                    }
+                    Column {
+                        spacing: units.gu(1)
+                        anchors {
+                            margins: units.gu(2)
+                            fill: parent
+                        }
+                        visible: light.connectedToBackend
+                        LightSensor {
+                            id: light
+                            active: true
+                        }
+                        RowField {
+                            title: i18n.tr('Light')
+                            text: light.reading != null ? light.reading.illuminance : '-'
+                        }
+                    }
+                }
+            }
+            Tab {
+                title: i18n.tr('Proximity')
+                page: Page {
+                    id: proximityPage
+                    NoData {
+                        visible: !proximity.connectedToBackend
+                    }
+                    Column {
+                        spacing: units.gu(1)
+                        anchors {
+                            margins: units.gu(2)
+                            fill: parent
+                        }
+                        visible: proximity.connectedToBackend
+                        ProximitySensor {
+                            id: proximity
+                            active: true
+                        }
+                        RowField {
+                            title: i18n.tr('Proximity near:')
+                            text: proximity.reading != null ? proximity.reading.near : '-'
+                        }
+                    }
+                }
+            }
+            Tab {
+                title: i18n.tr('Temperature')
+                page: Page {
+                    id: temperaturePage
+                    NoData {
+                        visible: !temperature.connectedToBackend
+                    }
+                    Column {
+                        spacing: units.gu(1)
+                        anchors {
+                            margins: units.gu(2)
+                            fill: parent
+                        }
+                        visible: temperature.connectedToBackend
+                        AmbientTemperatureSensor {
+                            id: temperature
+                            active: true
+                        }
+                        RowField {
+                            title: i18n.tr('Temperature')
+                            text: temperature.reading != null ? temperature.reading.temperature : '-'
                         }
                     }
                 }
