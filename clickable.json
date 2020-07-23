@@ -1,4 +1,3 @@
 {
-  "arch": "all",
-  "template": "pure-qml-cmake"
+  "builder": "pure-qml-cmake"
 }
