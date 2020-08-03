@@ -109,7 +109,7 @@ MainView {
                             fill: parent
                         }
                         visible: magnetometer.connectedToBackend
-                        Accelerometer {
+                        Magnetometer {
                             id: magnetometer
                             active: true
                         }
